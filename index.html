@@ -4,7 +4,13 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Akaunti Yangu NaboGaming</title>
+<script defer type="module">import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js";import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js";import { getFirestore, collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js";const firebaseConfig = {apiKey: "AIzaSyC_VKdV-KsIzUiOb7jFLsYXdTsuGkLiS-Q",authDomain: "register-71bde.firebaseapp.com",projectId: "register-71bde",storageBucket: "register-71bde.appspot.com",messagingSenderId: "412548441298",appId: "1:412548441298:web:e0fb2b6c5fbd4af7d0b90b"};const app = initializeApp(firebaseConfig);const auth = getAuth(app);const db = getFirestore(app);onAuthStateChanged(auth, (user) => {if (user) {updateUserProfile(user);const userDocRef = doc(db, "users", user.uid);const userDoc = {displayName: user.displayName,email: user.email,profilePicture: user.photoURL,};setDoc(userDocRef, userDoc, { merge: true }).then(() => {console.log("+");}).catch((error) => {console.error("?: ", error);});} else {displayPopup();}});function updateUserProfile(user) {const userName = user.displayName;const userEmail = user.email;const userProfilePicture = user.photoURL;document.getElementById("userName").textContent = userName;document.getElementById("userEmail").textContent = userEmail;document.getElementById("userProfilePicture").src = userProfilePicture;}function displayPopup() {var popup = document.getElementById('customPopup');popup.style.display = "block";}function closePopup() {var popup = document.getElementById('customPopup');popup.style.display = "none";}</script>
 <link rel="stylesheet" type="text/css" href="bootstrap.css">
+<style>
+  .delete {
+    display: none;
+  }
+</style>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="fontawesome-all.min.css">
 <link rel="manifest" href="_manifest.json" data-pwa-version="set_in_manifest_and_pwa_js">
@@ -17,29 +23,24 @@
 <a href="index.html" class="header-title">Ulimwengu Wako</a>
 <a href="#" data-back-button="" class="header-icon header-icon-1"><i class="fas fa-chevron-left"></i></a>
 <a href="#" data-menu="menu-main" class="header-icon header-icon-4"><i class="fas fa-bars"></i></a>
+<a href="#" class="header-icon header-icon-2" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
 <a href="#" data-toggle-theme="" class="header-icon header-icon-3 show-on-theme-dark"><i class="fas fa-sun"></i></a>
 <a href="#" data-toggle-theme="" class="header-icon header-icon-3 show-on-theme-light"><i class="fas fa-moon"></i></a>
 </div>
 
-<div class="page-title page-title-fixed" >
-  
-<a href="#" class="page-title-icon shadow-xl bg-theme color-red-dark" style="margin-left:60vw;"data-menu="menu-share"><i class="fas fa-sign-out-alt font-13"></i></a>
-<a href="#" class="page-title-icon shadow-xl bg-theme color-theme" data-menu="menu-share"><i class="fa fa-share-alt"></i></a>
-<a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-light" data-toggle-theme=""><i class="fa fa-moon"></i></a>
-<a href="#" class="page-title-icon shadow-xl bg-theme color-theme show-on-theme-dark" data-toggle-theme=""><i class="fa fa-lightbulb color-yellow-dark"></i></a>
-</div>
+
 <div class="page-content">
 <div class="page-title-clear">
 
 </div>
-<img style="margin-left:30px;" data-menu="menu-story" src="user.png" width="100" class="border-m border-red-dark rounded-circle mt-n5">
+<img style="margin-left:30px;" id="userProfilePicture" src="user.png" width="100" class="border-m border-red-dark rounded-circle mt-n5">
 </a>
 <div class="float-end mt-4 pt-2">
 <a href="#" data-menu="menu-controls" class="icon icon-xxs border border-theme color-theme rounded-l me-2"><i class="fa fa-ellipsis-h"></i></a>
 <a href="#" class="btn btn-xs border border-theme color-white bg-red-dark rounded-l me-3 font-600">Jiondoe NaboGaming</a>
 </div>
-<h1 class="ps-3 mb-n1 font-19 mb-0">User Not Found</h1>
-<p class="ps-3 mb-2">Inaonekana hujajiunga na nabogaming, tumia google chrome ama apple safari yako na ujisajili nasi <a href="https://nabogaming.github.io/Jisajili/">https://nabogaming.github.io/Jisajili/</a></p>
+<h1 class="ps-3 mb-n1 font-19 mb-0" id="userName">User Not Found</h1>
+<p class="ps-3 mb-2" id="userEmail">Inaonekana hujajiunga na nabogaming, tumia google chrome ama apple safari yako na ujisajili nasi <a href="https://nabogaming.github.io/Jisajili/">https://nabogaming.github.io/Jisajili/</a></p>
 <!--
 <p class="px-3 mb-3 line-height-sm color-theme">Model for Enabled's Mobile templates with a catchy name and cute avatar.</p>
 <div class="d-flex px-3">
@@ -73,89 +74,22 @@
 <div class="timeline-deco mt-4" style="margin-left:-19px; z-index:-1;"></div>
 <div class="d-flex mt-n1">
 <div>
-<img src="images/preload-logo.png" width="47" class="rounded-xl mt-1">
+<img src="nabobeatz.png" width="47" class="rounded-xl mt-1">
 </div>
 <div class="ps-3 mt-n2 mb-n2">
 <div class="d-flex align-items-center">
-<div class="pe-1"><h5 class="mb-0 font-16 font-700">Enabled</h5></div>
+<div class="pe-1"><h5 class="mb-0 font-16 font-700">Nabobeatz</h5></div>
 <div class="pe-3"><i class="font-11 line-height-xl fa fa-check-circle color-blue-dark"></i></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@iEnabled</span></div>
+<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@nabogaming</span></div>
 <div class="pe-2">·</div>
 <div><span class="opacity-60 font-11">6h</span></div>
 <div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
 </div>
 <p class="line-height-sm mt-n1 mb-2 pb-1">
-One of our best sellers <a href="#"><strong>#AppKit</strong></a> has been given the <a href="#"><strong>#Mobile</strong></a> Award of the Year on <a href="#"><strong>@Envato</strong></a>. Thank you! 😍
+Habari Yako <span> Still User Not Found</span>, Tunapenda Kukutaarifu Kuwa Tunaendelea Na Matengenezo Na Muonekano <a href="#"><strong>#Nadhifu</strong></a> Katika Akaunti Yako, Tegemea Makubwa Zaidi Ukiwa Hapa NaboGaming BetPlace 😍
 </p>
-<div class="d-flex pb-3">
-<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-sync pe-2"></i><span>31</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-heart pe-2"></i><span>1.5k</span></a>
-<a href="#" data-menu="menu-share" class="color-theme ms-auto opacity-60"><i class="far fa-upload pe-2"></i></a>
-</div>
-</div>
-</div>
-</div>
-<div class="content position-relative overflow-hidden mb-0 pb-3 mt-0">
-<div class="timeline-deco" style="margin-left:-19px; z-index:-1;"></div>
-<div class="d-flex mt-n1">
-<div>
-<img src="images/preload-logo.png" width="47" class="rounded-xl mt-1">
-</div>
-<div class="ps-3 mt-n2 mb-n2">
-<div class="d-flex align-items-center">
-<div class="pe-1"><h5 class="mb-0 font-16 font-700">Enabled</h5></div>
-<div class="pe-3"><i class="font-11 line-height-xl fa fa-check-circle color-blue-dark"></i></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@iEnabled</span></div>
-<div class="pe-2">·</div>
-<div><span class="opacity-60 font-11">6h</span></div>
-<div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
-</div>
-<p class="line-height-sm mt-n1 mb-2 pb-1">
-You can get <a href="#"><strong>#AppKit</strong></a> from <a href="#"><strong>@Envato</strong></a> following the link below. 👇🏻
-</p>
-<div class="border border-theme rounded-m overflow-hidden mb-3">
-<img src="images/6w.jpg" class="img-fluid">
-<div class="content mt-0">
-<span class="opacity-50 d-block pt-1 font-11">themeforest.net</span>
-<p class="mb-0 line-height-sm mb-n2 color-theme">
-Appkit Mobile PWA Site Template - Bootstrap 5 - Vanilla JS | Enabled
-</p>
-</div>
-</div>
-<div class="d-flex pb-3">
-<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-sync pe-2"></i><span>31</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-heart pe-2"></i><span>1.5k</span></a>
-<a href="#" data-menu="menu-share" class="color-theme ms-auto opacity-60"><i class="far fa-upload pe-2"></i></a>
-</div>
-<a href="#" class="pb-3 d-block">Show this thread</a>
-</div>
-</div>
-</div>
-<div class="content mt-0 mb-0">
-<div class="d-flex mt-n1">
-<div>
-<img src="images/preload-logo.png" width="47" class="rounded-xl mt-1">
-</div>
-<div class="ps-3 mt-n2 mb-n2">
-<div class="d-flex align-items-center">
-<div class="pe-1"><h5 class="mb-0 font-16 font-700">Enabled</h5></div>
-<div class="pe-3"><i class="font-11 line-height-xl fa fa-check-circle color-blue-dark"></i></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@iEnabled</span></div>
-<div class="pe-2">·</div>
-<div><span class="opacity-60 font-11">6h</span></div>
-<div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
-</div>
-<p class="line-height-sm mt-n1 mb-2 pb-1">
-It's trending! <a href="#"><strong>#AppKit</strong></a><a href="#"> <strong>#Mobile</strong></a><a href="#"> <strong>#PWA</strong></a>
-</p>
-<div class="d-flex pb-3">
-<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-sync pe-2"></i><span>31</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-heart pe-2"></i><span>1.5k</span></a>
-<a href="#" data-menu="menu-share" class="color-theme ms-auto opacity-60"><i class="far fa-upload pe-2"></i></a>
-</div>
+<!--<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
+-->
 </div>
 </div>
 </div>
@@ -164,41 +98,13 @@ It's trending! <a href="#"><strong>#AppKit</strong></a><a href="#"> <strong>#Mob
 <div class="content mb-0">
 <div class="d-flex mt-n1">
 <div>
-<img src="images/preload-logo.png" width="47" class="rounded-xl mt-1">
-</div>
-<div class="ps-3 mt-n2 mb-n2">
-<div class="d-flex align-items-center">
-<div class="pe-1"><h5 class="mb-0 font-16 font-700">Enabled</h5></div>
-<div class="pe-3"><i class="font-11 line-height-xl fa fa-check-circle color-blue-dark"></i></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@iEnabled</span></div>
-<div class="pe-2">·</div>
-<div><span class="opacity-60 font-11">6h</span></div>
-<div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
-</div>
-<p class="line-height-sm mt-n1 mb-2 pb-1">
-We're happy to announce that <a href="#"><strong>#Sticky</strong></a> is the best selling <a href="#"><strong>#Mobile</strong></a> progressive web app on <a href="#"><strong>@Envato</strong></a>. Thank you for all your
-love guys!
-</p>
-<div class="d-flex pb-3">
-<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-sync pe-2"></i><span>31</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-heart pe-2"></i><span>1.5k</span></a>
-<a href="#" data-menu="menu-share" class="color-theme ms-auto opacity-60"><i class="far fa-upload pe-2"></i></a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="card card-style mb-3">
-<div class="content mb-0">
-<div class="d-flex mt-n1">
-<div>
-<a href="#" data-menu="menu-story"><img src="images/4s.png" width="47" class="rounded-xl mt-1 border border-m border-blue-dark"></a>
+<a href="#" data-menu="menu-story"><img src="nabobeatz.png" width="47" class="rounded-xl mt-1 border border-m border-blue-dark"></a>
 </div>
 <div class="ps-3 mt-n1 mb-n2">
 <div class="d-flex align-items-center">
-<div class="pe-3"><h5 class="mb-0 font-16 font-700">Joe Handsome</h5></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@joesome</span></div>
+<div class="pe-1"><h5 class="mb-0 font-16 font-700">Nabobeatz</h5></div>
+<div class="pe-3"><i class="font-11 line-height-xl fa fa-check-circle color-blue-dark"></i></div>
+<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@nabogaming</span></div>
 <div class="pe-2">·</div>
 <div><span class="opacity-60 font-11">6h</span></div>
 <div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
@@ -226,38 +132,7 @@ How to make your site look and feel like a native app using PWA's.
 </div>
 </div>
 </div>
-<div class="card card-style">
-<div class="content mb-0">
-<div class="d-flex mt-n1">
-<div>
-<img src="images/2s.png" width="47" class="rounded-xl mt-1">
 </div>
-<div class="ps-3 mt-n1 mb-n2">
-<div class="d-flex align-items-center">
-<div class="pe-3"><h5 class="mb-0 font-16 font-700">Jack Son</h5></div>
-<div class="pe-2"><span class="font-11 opacity-60 accordionfont-11">@jack891</span></div>
-<div class="pe-2">·</div>
-<div><span class="opacity-60 font-11">6h</span></div>
-<div class="ms-auto"><a href="#" data-menu="menu-controls" class="icon icon-xss d-block color-theme"><i class="fa fa-ellipsis-h"></i></a></div>
-</div>
-<p class="line-height-sm mb-2 pb-1">
-PWA's are the absolute future of the Mobile Web. Every website should have a Mobile PWA to make it feel like an app.
-</p>
-<!--<a href="#" data-menu="ad-timed-3" data-timed-ad="10" data-auto-show-ad="10" class="btn btn-m btn-full shadow-xl font-600 bg-highlight mb-2">Auto Show in 60 Seconds</a>-->
-<div class="d-flex pb-3">
-<a href="#" data-menu="menu-reply" class="color-theme me-auto opacity-60"><i class="far fa-comment pe-2"></i><span>957</span></a>
-<a href="#" class="color-theme m-auto opacity-60"><i class="far fa-sync pe-2"></i><span>31</span></a>
-<a href="#" class="color-red-light m-auto"><i class="fa fa-heart pe-2"></i><span>1.5k</span></a>
-<a href="#" data-menu="menu-share" class="color-theme ms-auto opacity-60"><i class="far fa-upload pe-2"></i></a>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div data-menu-load="menu-footer.html"></div>
-</div>
-
-
 
 <div id="menu-story" class="menu menu-box-modal bg-dark-dark rounded-0 mh-100" data-menu-height="cover" data-menu-width="cover">
 <div class="card bg-6 rounded-0 mb-0" data-card-height="cover">
@@ -302,8 +177,8 @@ Simulate Stories with ease. It's a great and super easy to use feature.
 <div class="content pb-3 mt-0">
 <div class="list-group list-custom-small list-icon-0">
 <a href="#">
-<i class="font-15 fa fa-bookmark color-blue-dark"></i>
-<span class="font-13">Save</span>
+<i class="font-15 fa fa-trash color-blue-dark"></i>
+<span class="font-13 color-red-dark">Delete</span>
 <i class="fa fa-angle-right"></i>
 </a>
 <a href="#">
